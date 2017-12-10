@@ -26,6 +26,12 @@ function showDetails(x) {
     }
 }
 
+function getUpdate(id){       
+    $('#floId').append(id);    
+    $.get('/flowers/'+id, function(data){
+      renderUpdateData(data);
+    });
+}
 
 function clearDetails(x) {
     $("#sightingsTable tr").remove();    
@@ -62,6 +68,22 @@ function renderComnameData(data){
       "btn btn-info" style="float: right;" onclick="showUpdate(this)">\
       Update</td>\
       </tr>');  
+    }    
+} 
+
+function renderUpdateData(data){
+    $('#updateTable').append('<tr>\
+    <th>Genus</th>\
+    <th>Species</th>\
+    <th>Comname</th>\
+    </tr>');
+
+    for (var i = 0; i < data.length; i++) {
+        $('#updateTable').append('<tr>\
+        <td>' + data[i].GENUS + '</td>\
+        <td>' + data[i].SPECIES + '</td>\
+        <td>' + data[i].PERSON + '</td>\
+        </tr>');
     }    
 } 
 

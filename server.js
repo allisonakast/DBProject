@@ -12,6 +12,12 @@ app.get('/flowers-all', function(req, res) {
         res.send(data);
     })
 });
+app.get('/flowers/:flowersId', function(req, res) {
+    knex.raw('select genus, species, comname from flowers where comname = "' + req.params.flowersId +'"')
+    .then(function(data){
+        res.send(data);
+    })
+});
 
 app.get('/sightings-slp/:flowersId', function(req, res) {
     knex.raw('select sighted, location, person from flowers \
