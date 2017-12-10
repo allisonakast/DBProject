@@ -7,13 +7,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/flowers-all', function(req, res) {
-    knex.raw('select comname from flowers')
+    knex.raw('select * from flowers')
     .then(function(data){
         res.send(data);
     })
 });
 
-app.get('/flowers/:flowersId', function(req, res) {
+app.get('/sightings-slp/:flowersId', function(req, res) {
     knex.raw('select sighted, location, person from flowers \
     join sightings \
     on comname = name where comname = "' + req.params.flowersId +'"\
@@ -24,7 +24,7 @@ app.get('/flowers/:flowersId', function(req, res) {
     })
 });
 
-app.post('/flowers', function(req, res) {
+app.post('/sightings', function(req, res) {
   knex.raw('insert into sightings(name, person, location, sighted) \
   values("' + req.body.name +'", "' + req.body.person + '", \
   "' + req.body.location + '", "' + req.body.sighted + '")')
@@ -33,12 +33,12 @@ app.post('/flowers', function(req, res) {
   });
 });
 
-app.put('/flowers/:flowerId', function(req, res) {
+app.put('/sighted/:flowerId', function(req, res) {
     knex('sightings').insert(req.body)
     .then(function(id){
       res.redirect('/');
     });
-  });
+});
 
 app.listen(3000, function(){
   console.log('listening on port 3000');
