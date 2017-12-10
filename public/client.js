@@ -14,7 +14,10 @@ function renderComnameData(data){
     <td id=flower' + i + '>'+ data[i].COMNAME + '<button class=\
     "btn btn-info" style="float: right;" onclick="showDetails(this)">\
     Details\</td>\
-    </tr>');  
+    <td id=flower' + i + '>'+ data[i].COMNAME + '<button class=\
+    "btn btn-info" style="float: right;" onclick="edit(this)">\
+    Edit\</td>\
+    </tr>'); 
   }    
 } 
 
@@ -28,6 +31,41 @@ function showDetails(x) {
                 };
         }
     }
+}
+
+function edit(x) {
+    var tbl = document.getElementById("flowerTable");
+    if (tbl != null) {
+        for (var i = 0; i < tbl.rows.length; i++) {
+            for (var j = 0; j < tbl.rows[i].cells.length; j++)
+                tbl.rows[i].cells[j].onclick = function () { 
+                    getEdit(this.innerText.substr(0, this.innerText.length-7));
+                };
+        }
+    }
+}
+
+function getEdit(x){
+    $.get('/flowers/' + x, function(data){
+    renderflowersData(data);
+    console.log(data);
+    })
+}
+
+function renderflowersData(data){
+    $('#updateTable').append('<tr>\
+    <th>Genus</th>\
+    <th>Species</th>\
+    <th>Comname</th>\
+    </tr>');
+    for (var i = 0; i < data.length; i++) {
+        $('#updateTable').append('<tr>\
+        <td>' + data[i].GENUS + '</td>\
+        <td>' + data[i].SPECIES + '</td>\
+        <td>' + data[i].COMNAME + '</td>\
+        </tr>');
+    }  
+        
 }
 
 function clearDetails(x) {
