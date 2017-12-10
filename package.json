@@ -1,0 +1,26 @@
+{
+  "name": "dbproject",
+  "version": "1.0.0",
+  "description": "databases assignment 5",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allisonakast/DBProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allisonakast/DBProject/issues"
+  },
+  "homepage": "https://github.com/allisonakast/DBProject#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "knex": "^0.14.2",
+    "sqlite": "^2.9.0"
+  }
+}

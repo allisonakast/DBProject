@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Flowers Full Stack App</title>
+    <link rel="stylesheet" href="/main.css">
+  </head>
+  <body>
+    <div class="col-container">
+        <div class="col" style="background-color:#aaa;">
+            <h1>Sightings Data</h1>
+            <table id='sightingsTable' style="width:100%" align="center">                    
+            </table>
+            <br><br>
+            <button onclick="clearDetails(this)">Clear Details</button>            
+        </div>
+
+        <div class="col" style="background-color:#aaa;">
+            <h1>Insert New Sighting</h1>
+            <form name="insertForm" action="/flowers" method="post">
+            <input type="text" name="name" size="40" placeholder="flower name" required>
+            <input type="text" name="person" size="40" placeholder="sighted by 'person'" required>
+            <input type="text" name="location" size="40" placeholder="location" required>      
+            <input type="date" name="sighted" required>      
+            <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <br><br><br><br>    
+    <div class="col-container">  
+      <div class="col" style="background-color:#aaa;">
+        <h1>Flower Names</h1>            
+        <table id='flowerTable' style="width:100%" align="center">
+            <tr>
+                <th>COMNAME</th>
+            </tr>
+        </table>
+      </div>
+      <div class="col" style="background-color:#aaa;">
+            <h1>Update Flower Information</h1>
+            <p>This is where the update query will go</p>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" ></script>
+    <script type="text/javascript" src=/client.js></script>
+    </body>
+</html> 
