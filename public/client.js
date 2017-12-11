@@ -26,7 +26,8 @@ function showDetails(x) {
     }
 }
 
-function getUpdate(id){       
+function getUpdate(id){ 
+    $('#floId').empty();         
     $('#floId').append(id);    
     $.get('/flowers/'+id, function(data){
       renderUpdateData(data);
@@ -36,6 +37,7 @@ function getUpdate(id){
 function clearDetails(x) {
     $("#sightingsTable tr").remove();    
 }
+
 
 function getComname(){
     $.get('/flowers-all', function(data){
@@ -80,9 +82,9 @@ function renderUpdateData(data){
 
     for (var i = 0; i < data.length; i++) {
         $('#updateTable').append('<tr>\
-        <td>' + data[i].GENUS + '</td>\
+        <td>' + data[i].GENUS +'</td>\
         <td>' + data[i].SPECIES + '</td>\
-        <td>' + data[i].PERSON + '</td>\
+        <td>' + data[i].COMNAME + '</td>\
         </tr>');
     }    
 } 
