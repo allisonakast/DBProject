@@ -74,6 +74,7 @@ function renderComnameData(data){
 } 
 
 function renderUpdateData(data){
+    $("#updateTable tr").remove();
     $('#updateTable').append('<tr>\
     <th>Genus</th>\
     <th>Species</th>\

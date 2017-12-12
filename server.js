@@ -46,9 +46,9 @@ app.put('/sighted/:flowerId', function(req, res) {
     });
 });
 
-app.put('/updateFlower/:flowerId', function(req,res){
-    console.log(req.params.flowersId);
-    knex.raw('update flowers set genus = "' + req.body.genus +'", species = "'+ req.body.genus +'", comname =  "' + req.body.comname + '" where comname = "' + req.params.flowersId +'"')
+app.post('/updateFlower/:flowerId', function(req,res){
+    console.log(req.params.flowerId);
+    knex.raw('update flowers set genus = "' + req.body.genus +'", species = "'+ req.body.genus +'", comname =  "' + req.body.comname + '" where comname = "' + req.params.flowerId +'"')
     .then(function(id){
       res.redirect('/');
     });

@@ -9,7 +9,7 @@
     <div class="col-container">
         <div class="col" style="background-color:#aaa;">
             <h1>Sightings Data</h1>
-            <h2 id='floId'></h2>
+            
             <table id='sightingsTable' style="width:100%" align="center">                    
             </table>
             <br><br>
@@ -41,12 +41,10 @@
       <div class="col" style="background-color:#aaa;">
             <h1>Update Flower Information</h1>
             <h2 id='floId'></h2>
-            
             <table id='updateTable' style="width:100%" align="center">                    
             </table>
-
-
-            <form name="updateForm" action="/updateFlower/:floId" method="put">
+            <form name="updateForm" action="/updateFlower/:floId" method="post">
+                <input name="_method" type="hidden" value="PUT">
                 <input type="text" name="genus" size="40" placeholder="Genus" required>
                 <input type="text" name="species" size="40" placeholder="Species" required>
                 <input type="text" name="comname" size="40" placeholder="Comname" required>           
