@@ -1,4 +1,4 @@
 # DBProject
-To start project:
-npm install
-node server.js
+To start project: <br />
+npm install <br />
+node server.js 
