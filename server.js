@@ -39,32 +39,27 @@ app.post('/sightings', function(req, res) {
   });
 });
 
-app.put('/sighted/:flowerId', function(req, res) {
-    knex('sightings').insert(req.body)
+app.post('/sighted/:flower', function(req, res) {
+    console.log(req);
+    console.log(req.params.flower);
+    console.log(req.body.NAME);
+    knex.raw('UPDATE SIGHTINGS \
+    SET NAME = "' + req.body.NAME + '" \
+    WHERE NAME = "' + req.params.flower + '"')
     .then(function(id){
       res.redirect('/');
     });
 });
 
 app.post('/updateFlower/:flowerId', function(req,res){
-    console.log(req.params.flowerId);
-    console.log(req.body.COMNAME);
-    knex.raw('update flowers set genus = "\
-    ' + req.body.GENUS +'", species = "'+ req.body.SPECIES +'\
-    ", comname =  "' + req.body.COMNAME + '" where comname = "\
-    ' + req.params.flowerId +'"')
+    knex.raw('UPDATE FLOWERS \
+    SET COMNAME = "' + req.body.COMNAME + '" ,\
+    GENUS = "' + req.body.GENUS + '" ,\
+    SPECIES = "' + req.body.SPECIES + '"\
+     WHERE COMNAME = "' + req.params.flowerId +'"')
     .then(function(id){
-      res.redirect('/');
     });
   });
-/* 
-app.put('/updateFlower/:flowerId', function(req, res) {
-    knex('flowers').update(req.body)
-    .then(function(id){
-      res.redirect('/');
-    });
-});
-*/
 app.listen(3000, function(){
   console.log('listening on port 3000');
 });

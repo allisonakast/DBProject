@@ -27,16 +27,25 @@ function showDetails(x) {
 }
 
 $('#updateForm').submit(function () {
-   $.post('/updateFlower/'+ this.comname.id, 
+    var id = this.comname.id;
+   $.post('/updateFlower/'+ id, 
         {   
-        GENUS:this.genus.value, 
+        _method: "PUT",
+        GENUS: this.genus.value, 
         SPECIES: this.species.value, 
         COMNAME: this.comname.value
         }, 
         function(result){
-            console.log(result);
     });
-    return false;
+
+    $.post('/sighted/'+ id, 
+    {   
+        _method: "PUT",
+        NAME: this.comname.value
+    }, 
+    function(result){
+        console.log(result);
+    });
 });
 
 function getUpdate(id){ 
