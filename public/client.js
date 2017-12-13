@@ -27,10 +27,14 @@ function showDetails(x) {
 }
 
 $('#updateForm').submit(function () {
-   $.put('/updateFlower/'+ this.comname.value, 
-    { GENUS:this.genus.value, 
+   $.post('/updateFlower/'+ this.comname.id, 
+        {   
+        GENUS:this.genus.value, 
         SPECIES: this.species.value, 
         COMNAME: this.comname.value
+        }, 
+        function(result){
+            console.log(result);
     });
     return false;
 });
@@ -89,8 +93,11 @@ function renderUpdateData(data){
     $('#updateForm').append('\
         <input type="text" name="genus" SIZE="20" value ="' + data[0].GENUS +'" required>\
         <input type="text" name="species" SIZE="20" value ="' + data[0].SPECIES +'" required>\
-        <input type="text" name="comname" SIZE="20" value ="' + data[0].COMNAME +'" required>\
-        <button type="submit">Update</button>');
+        <input type="text" id="'+ data[0].COMNAME +'" \
+        name="comname" SIZE="20" value ="' + data[0].COMNAME +'" required>\
+        <button class=\
+        "btn btn-info" style="float: right;">\
+        Update');
 } 
 
 function renderSightingsData(data){
