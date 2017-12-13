@@ -26,6 +26,15 @@ function showDetails(x) {
     }
 }
 
+$('#updateForm').submit(function () {
+   $.put('/updateFlower/'+ this.comname.value, 
+    { GENUS:this.genus.value, 
+        SPECIES: this.species.value, 
+        COMNAME: this.comname.value
+    });
+    return false;
+});
+
 function getUpdate(id){ 
     $('#floId').empty();         
     $('#floId').append(id);    
@@ -74,20 +83,14 @@ function renderComnameData(data){
 } 
 
 function renderUpdateData(data){
-    $("#updateTable tr").remove();
-    $('#updateTable').append('<tr>\
-    <th>Genus</th>\
-    <th>Species</th>\
-    <th>Comname</th>\
-    </tr>');
+    $("#updateForm input").remove(); 
+    $("#updateForm button").remove();     
 
-    for (var i = 0; i < data.length; i++) {
-        $('#updateTable').append('<tr>\
-        <td>' + data[i].GENUS +'</td>\
-        <td>' + data[i].SPECIES + '</td>\
-        <td>' + data[i].COMNAME + '</td>\
-        </tr>');
-    }    
+    $('#updateForm').append('\
+        <input type="text" name="genus" SIZE="20" value ="' + data[0].GENUS +'" required>\
+        <input type="text" name="species" SIZE="20" value ="' + data[0].SPECIES +'" required>\
+        <input type="text" name="comname" SIZE="20" value ="' + data[0].COMNAME +'" required>\
+        <button type="submit">Update</button>');
 } 
 
 function renderSightingsData(data){
