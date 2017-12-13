@@ -39,13 +39,27 @@ app.post('/sightings', function(req, res) {
   });
 });
 
-app.put('/sighted/:flowerId', function(req, res) {
-    knex('sightings').insert(req.body)
+app.post('/sighted/:flower', function(req, res) {
+    console.log(req);
+    console.log(req.params.flower);
+    console.log(req.body.NAME);
+    knex.raw('UPDATE SIGHTINGS \
+    SET NAME = "' + req.body.NAME + '" \
+    WHERE NAME = "' + req.params.flower + '"')
     .then(function(id){
       res.redirect('/');
     });
 });
 
+app.post('/updateFlower/:flowerId', function(req,res){
+    knex.raw('UPDATE FLOWERS \
+    SET COMNAME = "' + req.body.COMNAME + '" ,\
+    GENUS = "' + req.body.GENUS + '" ,\
+    SPECIES = "' + req.body.SPECIES + '"\
+     WHERE COMNAME = "' + req.params.flowerId +'"')
+    .then(function(id){
+    });
+  });
 app.listen(3000, function(){
   console.log('listening on port 3000');
 });

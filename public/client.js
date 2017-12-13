@@ -26,7 +26,30 @@ function showDetails(x) {
     }
 }
 
-function getUpdate(id){       
+$('#updateForm').submit(function () {
+    var id = this.comname.id;
+   $.post('/updateFlower/'+ id, 
+        {   
+        _method: "PUT",
+        GENUS: this.genus.value, 
+        SPECIES: this.species.value, 
+        COMNAME: this.comname.value
+        }, 
+        function(result){
+    });
+
+    $.post('/sighted/'+ id, 
+    {   
+        _method: "PUT",
+        NAME: this.comname.value
+    }, 
+    function(result){
+        console.log(result);
+    });
+});
+
+function getUpdate(id){ 
+    $('#floId').empty();         
     $('#floId').append(id);    
     $.get('/flowers/'+id, function(data){
       renderUpdateData(data);
@@ -36,6 +59,7 @@ function getUpdate(id){
 function clearDetails(x) {
     $("#sightingsTable tr").remove();    
 }
+
 
 function getComname(){
     $.get('/flowers-all', function(data){
@@ -72,19 +96,17 @@ function renderComnameData(data){
 } 
 
 function renderUpdateData(data){
-    $('#updateTable').append('<tr>\
-    <th>Genus</th>\
-    <th>Species</th>\
-    <th>Comname</th>\
-    </tr>');
+    $("#updateForm input").remove(); 
+    $("#updateForm button").remove();     
 
-    for (var i = 0; i < data.length; i++) {
-        $('#updateTable').append('<tr>\
-        <td>' + data[i].GENUS + '</td>\
-        <td>' + data[i].SPECIES + '</td>\
-        <td>' + data[i].PERSON + '</td>\
-        </tr>');
-    }    
+    $('#updateForm').append('\
+        <input type="text" name="genus" SIZE="20" value ="' + data[0].GENUS +'" required>\
+        <input type="text" name="species" SIZE="20" value ="' + data[0].SPECIES +'" required>\
+        <input type="text" id="'+ data[0].COMNAME +'" \
+        name="comname" SIZE="20" value ="' + data[0].COMNAME +'" required>\
+        <button class=\
+        "btn btn-info" style="float: right;">\
+        Update');
 } 
 
 function renderSightingsData(data){
