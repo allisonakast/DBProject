@@ -40,9 +40,6 @@ app.post('/sightings', function(req, res) {
 });
 
 app.post('/sighted/:flower', function(req, res) {
-    console.log(req);
-    console.log(req.params.flower);
-    console.log(req.body.NAME);
     knex.raw('UPDATE SIGHTINGS \
     SET NAME = "' + req.body.NAME + '" \
     WHERE NAME = "' + req.params.flower + '"')

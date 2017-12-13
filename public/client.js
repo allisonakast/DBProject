@@ -44,7 +44,6 @@ $('#updateForm').submit(function () {
         NAME: this.comname.value
     }, 
     function(result){
-        console.log(result);
     });
 });
 
